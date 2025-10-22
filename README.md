@@ -1,10 +1,12 @@
-# X650 Pixhawk 6X Jetson Orin Setup Guide
+# X650 Pixhawk 6X Jetson Orin Setup Guide with Fast Lio
 
-A guide for setting up a high-performance autonomous drone using the X650 frame, Pixhawk 6X flight controller, and Jetson Orin NX computing platform, with livox mid360 and realsense d435.
+
 
 ## Overview
 
-This setup represents one of the most popular and powerful configurations for custom-built multicopter drones, combining robust hardware with advanced autonomous capabilities.
+A guide for setting up a high-performance autonomous drone using the X650 frame, Pixhawk 6X flight controller, and Jetson Orin NX computing platform, with livox mid360 and realsense d435. This setup represents one of the most popular and powerful configurations for custom-built multicopter drones, combining robust hardware with advanced autonomous capabilities. 
+
+More importantly, we also offer detailed instructions to set up LIO algothrims.
 
 ## Hardware and Software Components
 
