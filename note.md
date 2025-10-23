@@ -4,8 +4,6 @@
 ## Hardware and Connection
 
 
-
-
 - **Holybro Pixhawk 6X** - Advanced flight controller
 - **Jetson Orin NX 16GB** - Edge AI computing unit
 - **Holybro Jetson Baseboard** - motherboard for Jetson
@@ -197,3 +195,25 @@ just like the python example in **MAVLink Setup**, you need to explicitly specif
 roslaunch mavros px4.launch fcu_url:=udp://192.168.0.1:14540@192.168.0.3:14540
 ```
 
+## **PX4 configuration and tuning** 
+
+Please follow the instructions in [PX4 official documentation](https://docs.px4.io/main/en/config/README.html) to study and setup the drone. We highly recommend to read the official documentation carefully and thoroughly, try to understand the concepts and principles.
+
+
+## **Livox mid360 and fast lio Setup**
+
+For lidar-inertial odometry (LIO) algorithm, please follow the instructions inside the `lio` folder to setup the livox mid360 and fast lio algothrim. It's also a good material to study external localization or offboard mode. 
+
+If you don't need a external localization algorithm for Position Estimation, you can skip this section.
+
+
+## **Flying and parameters setup**
+
+Please follow the instructions in [PX4 official documentation](https://docs.px4.io/main/en/config/README.html) to setup the flying parameters. We highly recommend to read the official documentation carefully and thoroughly, try to understand all the concepts and principles.
+
+
+## **Ready to fly** 
+
+Find a good place to fly, and put the rtk base on a open space, connect your rtk base to the QGC computer, wait for the rtk to fix.
+
+Turn on the drone, make sure the connection to the QGC computer, romote controller, is stable. Wait for the QGC to turn to green which means ready to fly, and then you can start to fly your drone.

@@ -4,22 +4,55 @@
 
 - **Wi-Fi**：`TIARIAS`
 - **SSH**：`ssh x650@192.168.50.240`  
-  **Password**：`future`
+- **Password**：`future`
+
+
+
+这台6x上的px4的默认ip仍然是192.168.0.3
+jetson主机ip：192.168.0.1
+mid360ip：192.168.0.2
+fc ip：192.168.0.3
+
+
+
+I/O PWM out= main out
+FMU pwm out= aux 连接的马达
+telem2 内部已经连接到 jetson,我的实验里面不上
+
+mavlink has 3 instances.
+mav_0 is in telem1, connected to skydriod rc
+mav_1 is in telem3, connect to telemetry radio
+mav_2 is in ethernet, connect to switch on jetsonboard, so it's onboard mode.
+
+
+所以应该设置成如下：
+
+官网的设置会让jetson的无线网都无法联网，不能用那个设置。
+
+```bash
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: no
+      addresses:
+        - 192.168.0.1/24
+
+```
+
 
 
 # JetPack 5.1.2  ros1 Noetic
 
-## Sensors
-
-
-
-
-
 ### realsense Configuration
+px4版本：1.15.4
 
-realsense D435
+RC IN:遥控器
+i2c连接了range finder
 
-https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md
+qgc4.4.4版本 https://docs.qgroundcontrol.com/Stable_V4.4/en/
+
 
 
 串口：
@@ -31,38 +64,20 @@ but!!!!!在我板子上实际连接的是/dev/ttyTHS0
 
 await drone.connect(system_address="serial:///dev/ttyTHS0:921600")
 
-
-
 若你追求 高速稳定、多设备互联，推荐用 以太网 + UDP 方式连接 Pixhawk。
 
-Python代码：
-mav_x_mode 在 normal 模式下，使用Server 模式
-await drone.connect(system_address="udp://:14540")
 
 在 onboard模式下，只能使用Client 模式，主动连接
 await drone.connect(system_address="udp://192.168.0.3:14540")
 
-
-ros驱动：实际就是ros把mavlink包起来了
------------------------------------------
+------------------------------------------------------------------------------------
 先用一个终端建立连接：之后可以立马关闭  有时又用不上
-echo "hi" | nc -u 192.168.0.3 14540 -p 14540
 
 roslaunch mavros px4.launch fcu_url:=udp://192.168.0.1:14540@192.168.0.3:14540
 
+realsense D435
 
------------------------------------------
-
-
-
-
-I am using a Holybro X650 drone, equipped with a Pixhawk-Jetson baseboard, Pixhawk 6X, and two NVIDIA Jetson Orin NX 16GB modules. The Jetson is connected to a Livox MID360. Jetson also has JetPack 5.1.2 installed.
-
-
-
-The Jetson baseboard has a wireless network card, and my development computer (a Dell running Ubuntu 20.04) is connected to the same Wi-Fi as the Jetson. My computer is now connected to the Jetson via SSH.
-
-i have a NVIDIA Jetson Orin NX 16GB. It has JetPack 5.1.2 and ros1 Noetic
+https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md
 
 
 echo $LD_LIBRARY_PATH  
@@ -82,161 +97,14 @@ ldd ~/catkin_ws/devel/lib/librealsense2_camera.so | grep opencv
 
 git clone https://github.com/pal-robotics/ddynamic_reconfigure.git
 
-https://docs.px4.io/main/en/companion_computer/holybro_pixhawk_jetson_baseboard.html#ethernet-setup-using-netplan
 
-
-
-这台6x上的px4的默认ip仍然是192.168.0.3
-
-所以应该设置成如下：
-
-官网的设置会让jetson的无线网都无法联网，不能用那个设置。
-
-```bash
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    eth0:
-      dhcp4: no
-      addresses:
-        - 192.168.0.1/24
-
-```
-
-pip3 install mavsdk 就是要等很久，正常
-
-
-# PX4 Flight Modes Summary
-
-PX4 supports two main types of flight modes: **Manual** and **Autonomous**.
-
----
-
-## 🕹️ Manual Modes
-
-### ✅ Manual-Easy Modes
-
-#### 1. **Position Mode**
-- Easiest and safest manual mode (requires GPS).
-- Controls:
-  - Roll/Pitch: Ground acceleration (like a car pedal).
-  - Yaw: Rotation.
-  - Throttle: Climb/descent rate.
-- Behavior:
-  - Releasing the sticks causes the vehicle to level, brake, and hold position (even against wind).
-
-#### 2. **Position Slow Mode**
-- A speed- and yaw-rate-limited version of Position Mode.
-- Used for flying near obstacles or for regulatory compliance.
-
-#### 3. **Altitude Mode**
-- Easiest manual mode without GPS.
-- Releasing sticks:
-  - Maintains level and altitude.
-  - No horizontal position hold — vehicle drifts with inertia and wind.
-
-#### 4. **Stabilized Mode also Manual Mode**  
-- Releasing sticks:
-  - Maintains level attitude only (not position or altitude).
-  - Subject to drift due to inertia and wind.
-
----
-
-### 🎯 Manual-Acrobatic Mode
-
-#### 5. **Acro Mode**
-- Designed for acrobatic maneuvers (e.g., rolls, flips).
-- Releasing sticks stops rotation, but does not auto-level or stabilize.
-
----
-
-## 🤖 Autonomous Modes
-
-### ✅ Fully Autonomous
-
-#### 1. **Hold**
-- Vehicle hovers in place, holding both position and altitude.
-
-#### 2. **Return (RTL)**
-- Ascends to a safe altitude, returns to home or rally point, then lands.
-- Requires GPS.
-
-#### 3. **Mission**
-- Executes a pre-uploaded mission (waypoints).
-- Requires GPS.
-
-#### 4. **Takeoff**
-- Performs vertical takeoff, then switches to Hold.
-
-#### 5. **Land**
-- Lands immediately.
-
-#### 6. **Orbit**
-- Circles a point while yawing to face the center.
-- RC control can adjust radius, speed, and direction.
-
-#### 7. **Follow Me**
-- Follows a beacon transmitting position setpoints (e.g., phone/GCS).
-- RC can configure the follow offset.
-
-#### 8. **Offboard**
-- Obeys position, velocity, or attitude setpoints sent via MAVLink or ROS 2.
-
----
-
-## 🔄 Flight Mode Switching
-
-- Modes are switched using:
-  - RC transmitter switches, or
-  - Ground Control Station (e.g., QGroundControl).
-
-> PX4 will **not allow switching** to certain modes unless preconditions are met:
-- GPS lock,
-- Airspeed sensor available,
-- Valid vehicle orientation, etc.
-
----
-
-For detailed information, refer to the mode-specific sidebar topics in the [PX4 documentation](https://docs.px4.io/).
-
-
-jetson主机ip：192.168.0.1
-mid360ip：192.168.0.2
-fc ip：192.168.0.3
-
-I/O PWM out= main out
-FMU pwm out= aux 连接的马达
-telem2 内部已经连接到 jetson,我的实验里面不上
-
-
-mavlink has 3 instances.
-mav_0 is in telem1, connected to skydriod rc
-mav_1 is in telem3, connect to telemetry radio
-mav_2 is in ethernet, connect to switch on jetsonboard, so it's onboard mode.
-
-px4版本：1.15.4
-
-RC IN:遥控器
-i2c连接了range finder
-
-qgc4.4.4版本 https://docs.qgroundcontrol.com/Stable_V4.4/en/
-
-
-safety switch在 gps 上，我这个应该关掉了
-
-An arming button or "momentary switch" can be configured to trigger arm/disarm instead of gesture-based arming (setting an arming switch disables arming gestures). The button should be held down for (nominally) one second to arm (when disarmed) or disarm (when armed).
+-----------------------------------------------------
 
 
 里程计把 camera_init 和 body 联系起来：原始只有 camera_init  和 body 这个节点
 
-
-
 odom：是原始机体向上的的位置
 camera_init: 激光雷达的初始位置
-
-
-
 
 body：激光雷达一直动，显示的位置
 baselink 是机体一直动的位置
@@ -251,15 +119,9 @@ livox ros driver 2 读取雷达发送话题 所以等于rosbag
         args="0.0635 0 -0.1450 0 2.3562 0 odom camera_init"/>
 
 
-
-
-
-
 激光探测测距仪内部集成了 IMU芯片（3轴加速度计和3轴陀螺仪）：默认情况下，上电后即开始以200Hz 频率推送IMU数据（可通过上位机开启或关闭）。数据内容包括3轴加速度以及 轴角速度，方向与点云坐标系相固，在点云坐标系下IMU芯片的位置为（×=11.0mm，
 y-23.29 mm, Z= 44.12 mm ) -
 具体通信协议和数据格式请查看通信协议相关章节。
-
-
 
 
 rviz_MID360.launch	Connect to MID360 LiDAR device
@@ -271,6 +133,7 @@ msg_MID360.launch	Connect to MID360 LiDAR device
 Publish livox customized pointcloud data
 
 
+-------------------------------------------------------
 
 
 pool ntp.ubuntu.com        iburst maxsources 4
@@ -397,9 +260,6 @@ The common rangefinder configuration is specified using EKF2_RNG_* parameters.
 在 LIO SLAM算法启动时，会把第一帧相机位置设为坐标原点，前向/右向/下向作为 X/Y/Z 轴。
 
 
-————————————
-在 LIO SLAM算法启动时，会把第一帧相机位置设为坐标原点，前向/右向/下向作为 X/Y/Z 轴。
-————————————————————
 
 坐标系
 
@@ -427,7 +287,7 @@ X 轴：机头指向前
 Y 轴：机翼右侧
 Z 轴：垂直向下（右手坐标系，NED frame 标准）。
 
-2. Gyroscope（陀螺仪） 内置
+1. Gyroscope（陀螺仪） 内置
 作用：测量无人机在 机体系 下的角速度 (rad/s)。
 坐标系：机体系 (roll/pitch/yaw 的变化率绕 X/Y/Z)。
 
@@ -564,4 +424,9 @@ Indoor (flat terrain)	0 (disabled)	1 (enabled)	2 (always enabled)	2 (range)	hori
 
 ————————————
 MAVROS will take care of NED conversions.
+
+realsense-viewer
+
+
+roslaunch realsense2_camera rs_camera.launch
 

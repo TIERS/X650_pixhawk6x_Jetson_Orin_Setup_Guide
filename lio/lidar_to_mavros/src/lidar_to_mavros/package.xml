@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>lidar_to_mavros</name>
+  <version>0.0.1</version>
+  <description>Publish PoseStamped to mavros/vision_pose/pose from TF</description>
+
+  <maintainer email="hazhan@utu.fi">nx</maintainer>
+  <license>MIT</license>
+
+  <!-- 构建工具 -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- 运行&编译依赖（组件级依赖用 format=2 的 depend 即可覆盖 build/exec） -->
+  <depend>roscpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <!-- 如果你还需要保留读取 /Odometry 的版本，再加上 nav_msgs -->
+  <!-- <depend>nav_msgs</depend> -->
+
+  <export/>
+</package>

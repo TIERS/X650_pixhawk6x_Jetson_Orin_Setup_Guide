@@ -1,12 +1,11 @@
 # X650 Pixhawk 6X Jetson Orin Setup Guide with Fast Lio
 
 
-
 ## Overview
 
-A guide for setting up a high-performance autonomous drone using the X650 frame, Pixhawk 6X flight controller, and Jetson Orin NX computing platform, with livox mid360 and realsense d435. This setup represents one of the most popular and powerful configurations for custom-built multicopter drones, combining robust hardware with advanced autonomous capabilities. 
+A guide for setting up a high-performance autonomous drone using the X650 frame, Pixhawk 6X flight controller, and Jetson Orin NX computing platform, with livox mid360 and realsense d435. 
 
-More importantly, we also offer detailed instructions to set up LIO algothrims.
+More importantly, we also offer detailed instructions to set up fast lio algothrim with livox mid360.
 
 ## Hardware and Software Components
 
@@ -17,7 +16,7 @@ More importantly, we also offer detailed instructions to set up LIO algothrims.
 - **Holybro X650** - Carbon fiber quadcopter frame
 - **Livox MID360** - 3D LiDAR sensor for SLAM or data collection
 - **Holybro RTK F9P Bundle** - High-precision GPS with RTK capabilities (optional)
-- **realsense D435** - Stereo camera for stereo vision or data collection
+- **Realsense D435** - Stereo camera for stereo vision or data collection
 
 ## Software Components and Core Systems:
 
@@ -26,9 +25,8 @@ More importantly, we also offer detailed instructions to set up LIO algothrims.
 - **PX4:1.15.4**
 - **QGC:4.4.4**
 - **MAVROS**
-- **LIO (LiDAR-Inertial Odometry):Fast-LIO**
+- **LIO (LiDAR-Inertial Odometry): Fast-LIO**
 - **MAVSDK**
-
 
 
 ## Purpose of This Repository
@@ -48,7 +46,6 @@ When setting up this drone configuration, I discovered that the official documen
 
 - **`README.md`** - readme file
 - **`note.md`** - Main documentation file
-- **`lio`** - LIO related settings and files
+- **`lio`** - Lidar and LIO related settings and files
 - **`own_notebook/`** - Personal notes (contains mixed Chinese/English content, no need to read this one)
 - **`images/`** - Supporting images and diagrams
-
