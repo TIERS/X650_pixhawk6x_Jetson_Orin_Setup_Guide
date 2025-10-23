@@ -215,7 +215,7 @@ For more information on this return type see Home/Rally Point Return Type (RTL_
 
 
 
-每次无人机放在原地，所有软件打开后再飞，稳定 5 分钟
+每次无人机放在原地，所有软件打开后再飞，  稳定 5 分钟
 
 indoor：直接只依赖于 lio 关闭磁力计和 gpsEKF2_EV_CTRL ：horizontal position，vertical position，yaw ;yaw will use ev as reference
 EKF2_MAG_TYPE：none 
@@ -260,18 +260,6 @@ The common rangefinder configuration is specified using EKF2_RNG_* parameters.
 在 LIO SLAM算法启动时，会把第一帧相机位置设为坐标原点，前向/右向/下向作为 X/Y/Z 轴。
 
 
-
-坐标系
-
-
-PX4 uses FRD (X Forward, Y Right and Z Down) for the local body frame as well for the reference frame. When using the heading of the magnetometer, the PX4 reference frame x axis will be aligned with north, so therefore it is called NED (X North, Y East, Z Down).
-
-Frame	PX4	ROS
-Body	FRD (X Forward, Y Right, Z Down)	FLU (X Forward, Y Left, Z Up), usually named base_link
-World	FRD or NED (X North, Y East, Z Down)	FLU or ENU (X East, Y North, Z Up), with the naming being odom or map
-
-
-PX4 sets the NED origin at the first valid global position fix (GPS lat/lon/alt). If no GPS is available, it uses the arming position as the origin. All local navigation and position control are expressed relative to this fixed reference.
 
 
 Yaw（偏航）：指的是无人机 机头相对于地理坐标系（通常是 NED，North-East-Down）北方向的转角。
@@ -429,4 +417,3 @@ realsense-viewer
 
 
 roslaunch realsense2_camera rs_camera.launch
-
