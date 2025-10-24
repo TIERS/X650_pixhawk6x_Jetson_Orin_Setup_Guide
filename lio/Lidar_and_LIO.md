@@ -1,4 +1,4 @@
-# Livox MID360 LiDAR and FAST-LIO Setup Guide
+# Livox MID360 LiDAR and FAST-LIO MAVROS Integration Setup Guide
 
 This guide covers the complete setup process for the Livox MID360 LiDAR sensor with FAST-LIO and PX4 integration via MAVROS.
 
