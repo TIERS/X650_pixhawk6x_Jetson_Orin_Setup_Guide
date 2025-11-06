@@ -6,6 +6,10 @@
 - **SSH**：`ssh x650@192.168.50.240`  
 - **Password**：`future`
 
+router：
+asus：future2025
+
+
 
 
 这台6x上的px4的默认ip仍然是192.168.0.3
