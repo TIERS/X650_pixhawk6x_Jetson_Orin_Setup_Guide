@@ -221,7 +221,9 @@ For more information on this return type see Home/Rally Point Return Type (RTL_
 
 每次无人机放在原地，所有软件打开后再飞，  稳定 5 分钟
 
-indoor：直接只依赖于 lio 关闭磁力计和 gpsEKF2_EV_CTRL ：horizontal position，vertical position，yaw ;yaw will use ev as reference
+
+indoor：直接只依赖于 lio 关闭磁力计和 gps
+EKF2_EV_CTRL ：horizontal position，vertical position，yaw ;yaw will use ev as reference
 EKF2_MAG_TYPE：none 
 EKF2_HGT_REF：vision
 EKF2_gps_CTRL：first three closed
