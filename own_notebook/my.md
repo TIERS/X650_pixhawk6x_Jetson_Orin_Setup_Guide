@@ -7,10 +7,28 @@
 - **Password**：`future`
 
 router：
-asus：future2025
+asus：future2025 but minh destroyed it
+drone ip: 192.168.7.240
+my dell laptop ip: 192.168.7.172
+dog ip: 192.168.7.225
 
 
 
+dog's own sensors' ip:192.168.1.xx
+
+
+
+mocap needs TIAIRS wifi:
+mocap ip: 192.168.50.213
+my dell laptop ip: 192.168.50.172
+drone ip: 192.168.50.240
+
+
+
+zerotier:
+drone ip: 192.168.194.177
+my dell laptop ip: 192.168.194.57
+dog ip: 192.168.194.228
 
 这台6x上的px4的默认ip仍然是192.168.0.3
 jetson主机ip：192.168.0.1
