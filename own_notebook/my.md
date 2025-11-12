@@ -6,7 +6,7 @@
 - **SSH**：`ssh x650@192.168.50.240`  
 - **Password**：`future`
 
-router：
+router：192.168.7.1
 asus：future2025 but minh destroyed it
 drone ip: 192.168.7.240
 my dell laptop ip: 192.168.7.172
