@@ -5,7 +5,9 @@
 ![alt text](images/VilleKankarePhoto_DIWA_TestDay-1.jpg)
 
 
-I built this drone. And the photo was taken by a colleague [Ville Kankare](https://villekankarephoto.kuvat.fi/etusivu/).
+I built this drone from scratch, initially for my Phd project [DIWA](https://digitalwaters.fi/).
+
+And the photo is from a colleague [Ville Kankare](https://villekankarephoto.kuvat.fi/etusivu/).
 
 A guide for setting up a high-performance autonomous drone using the X650 frame, Pixhawk 6X flight controller, and Jetson Orin NX computing platform, with livox mid360 and realsense d435. 
 
