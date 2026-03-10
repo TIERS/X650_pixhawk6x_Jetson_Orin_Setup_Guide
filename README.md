@@ -26,7 +26,11 @@ More importantly, we also offer detailed instructions to set up fast lio algothr
 
 ## Software Components and Core Systems:
 
+- **ubuntu 20.04**
 - **JetPack 5.1.2**
+- **cuda 11.4**
+- **cuDNN 8.6**
+- **tensorRT 8.5.2**
 - **ROS1 Noetic**
 - **PX4:1.15.4**
 - **QGC:4.4.4**
