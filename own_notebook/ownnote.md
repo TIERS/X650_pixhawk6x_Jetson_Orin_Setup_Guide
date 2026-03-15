@@ -156,8 +156,7 @@ https://docs.px4.io/main/en/config/gyroscope.html
 
 Multicopters can be landed in any manual mode. Make sure to keep the throttle stick pulled down after touching down until the motors have switched off.
 
-
-————————
+——————————————————————————————————————————
 坐标轴:
 
 Depending on the source of your reference frame, you will need to apply a custom transformation to the pose estimate before sending the MAVLink Vision/MoCap message. This is necessary to change the orientation of the parent and child frame of the pose estimate, such that it fits the PX4 convention. Have a look at the MAVROS odom plugin for the necessary transformations.
@@ -268,6 +267,3 @@ MAVROS will take care of NED conversions.
 local body frame
 reference frame
 FRD 也叫NED
-
-
-

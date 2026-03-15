@@ -43,7 +43,7 @@ telem2 内部已经连接到 jetson,我的实验里面不上
 
 mavlink has 3 instances.
 mav_0 is in telem1, connected to skydriod rc
-mav_1 is in telem3, connect to telemetry radio
+mav_1 is in telem3, connect to the normal telemetry radio
 mav_2 is in ethernet, connect to switch on jetsonboard, so it's onboard mode.
 
 
@@ -235,10 +235,10 @@ For more information on this return type see Home/Rally Point Return Type (RTL_
 
 芬兰使用 低功率下433，或者 868，不能使用 915
 
-
-
 每次无人机放在原地，所有软件打开后再飞，  稳定 5 分钟
-
+-------------------------------------------
+装了 新的payload之后，do sensors calibration and auto tuning
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 indoor：直接只依赖于 lio 关闭磁力计和 gps
 EKF2_EV_CTRL ：horizontal position，vertical position，yaw ;yaw will use ev as reference
@@ -250,7 +250,7 @@ SYS_HAS_gps：disabled
 
 CAL_MAG0_PRIO:Disabled(medium)
 CAL_MAG1_PRIO:disabled(high)
-CAL_MAG2_PRIO:disabled(high)
+CAL_MAG2_PRIO:disabled(hig
 
 
 outdoor：
@@ -267,10 +267,8 @@ CAL_MAG2_PRIO:high
 
 
 ————————————
-这个几个参数要设置一下：距离 cog 的距离
-In order to compensate for the relative motion between the receiver and the CoG, you should configure the following parameters to set the offsets: EKF2_GPS_POS_X, EKF2_GPS_POS_Y and EKF2_GPS_POS_Z.
-This is important because the body frame estimated by the EKF will converge on the location of the GNSS module and assume it to be at the CoG. If the GNSS module is significantly offset from the CoG, then rotation around the COG will be interpreted as an altitude change, which in some flight modes (such as position mode) will result in unnecessary corrections.
-It is particularly important if using RTK GNSS which has centimeter-level accuracy, because if the offsets are not set then GNSS measurements will often be rejected as inconsistent with the current EFK estimate.
+这个几个参数要设置一下：距离 cog 的距离  我是把gps那个底座的平面当做了重心!!!!!
+EKF2_GPS_POS_X, EKF2_GPS_POS_Y and EKF2_GPS_POS_Z.
 
 
 The common rangefinder configuration is specified using EKF2_RNG_* parameters. These include (non exhaustively):
@@ -278,12 +276,9 @@ The common rangefinder configuration is specified using EKF2_RNG_* parameters.
 
 
 ———————————
-装了 新的payload之后，do sensors calibration and auto tuning
-我是把gps那个底座的平面当做了重心
+
 
 在 LIO SLAM算法启动时，会把第一帧相机位置设为坐标原点，前向/右向/下向作为 X/Y/Z 轴。
-
-
 
 
 Yaw（偏航）：指的是无人机 机头相对于地理坐标系（通常是 NED，North-East-Down）北方向的转角。
@@ -438,6 +433,5 @@ Indoor (flat terrain)	0 (disabled)	1 (enabled)	2 (always enabled)	2 (range)	hori
 MAVROS will take care of NED conversions.
 
 realsense-viewer
-
 
 roslaunch realsense2_camera rs_camera.launch
