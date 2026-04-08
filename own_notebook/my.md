@@ -233,7 +233,7 @@ The cone affects the minimum return altitude if return mode is triggered within 
 For more information on this return type see Home/Rally Point Return Type (RTL_TYPE=0)
 
 
-芬兰使用 低功率下433，或者 868，不能使用 915
+芬兰使用 低功率下433，或者 868，不能使用915
 
 每次无人机放在原地，所有软件打开后再飞，  稳定 5 分钟
 -------------------------------------------
