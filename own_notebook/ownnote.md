@@ -25,7 +25,6 @@ If you're working with EKF2, only the "vision" pipelines are supported. To use M
 * Note that if you are sending odometry data to px4 using child_frame_id = base_link, then you need to make sure that the twist portion of the nav_msgs/Odometry message is expressed in body frame, not in inertial frame!!!!!.
 —————————
 
-
 pose → 在 header.frame_id 坐标系下表示（常见：odom 或 map）。
 twist → 是 child_frame_id 对应的坐标系中的速度（常见：base_link）。
 本身 ros 就是这么设定的
