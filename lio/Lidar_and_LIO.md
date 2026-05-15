@@ -24,6 +24,8 @@ This guide covers the complete setup process for the Livox MID360 LiDAR sensor w
 
 ### Driver Configuration
 
+For livox serials, FAST-LIO only support the data collected by the livox_lidar_msg.launch since only its livox_ros_driver/CustomMsg.
+
 Configure the driver by editing the following files:
 - **Config file**: `/config/MID360_config.json` (inside the driver folder)
 - **Launch file**: `/launch_ROS1/msg_MID360.launch`
