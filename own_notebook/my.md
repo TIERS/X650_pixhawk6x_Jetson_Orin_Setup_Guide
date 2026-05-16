@@ -101,7 +101,7 @@ roslaunch mavros px4.launch fcu_url:=udp://192.168.0.1:14540@192.168.0.3:14540
 
 git clone https://github.com/pal-robotics/ddynamic_reconfigure.git
 
------------------------------------------------------
+------------------------------------------------------------------------------------
 
 
 里程计把 camera_init 和 body 联系起来：原始只有 camera_init  和 body 这个节点
@@ -135,7 +135,7 @@ msg_MID360.launch	Connect to MID360 LiDAR device
 Publish livox customized pointcloud data
 
 
----------------------------
+------------------------------------------------------------------------------------
 Minimum Return Altitude
 By default the minimum return altitude is set using RTL_RETURN_ALT, and the vehicle will just return at the higher of RTL_RETURN_ALT or the initial vehicle altitude.
 The minimum return altitude can be further configured using RTL_CONE_ANG, which together with RTL_RETURN_ALT defines a half cone centered around the destination landing point. The cone angle allows a lower minimum return altitude when the return mode is executed close to the destination. This is useful when there are few obstacles near the destination, because it may reduce the minimum height that the vehicle needs to ascend before landing, and hence power consumption and time to land.
@@ -147,8 +147,14 @@ For more information on this return type see Home/Rally Point Return Type (RTL_
 芬兰使用 低功率下433，或者 868，不能使用915
 
 每次无人机放在原地，所有软件打开后再飞，  稳定 5 分钟
--------------------------------------------
+
+
+------------------------------------------------------------------------------------
+
+
+
 装了 新的payload之后，do sensors calibration and auto tuning
+
 
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -179,25 +185,18 @@ CAL_MAG1_PRIO:high
 CAL_MAG2_PRIO:high
 
 
-————————————
-这个几个参数要设置一下：距离 cog 的距离  我是把gps那个底座的平面当做了重心!!!!!！！！！！！！！！！！！！！！
+————————————————————
+这个几个参数要设置一下：距离 cog (center of gravity) 的距离  我是把gps那个底座的平面当做了重心!!!!!！！！！！！！！！！！！！！！
 EKF2_GPS_POS_X, EKF2_GPS_POS_Y and EKF2_GPS_POS_Z.
-
 
 The common rangefinder configuration is specified using EKF2_RNG_* parameters. These include (non exhaustively):
 * EKF2_RNG_POS_X, EKF2_RNG_POS_Y, EKF2_RNG_POS_Z - offset of the rangefinder from the vehicle centre of gravity in X, Y, Z directions.
 
-
-———————————
-
-
+————————————————————
 
 Yaw（偏航）：指的是无人机 机头相对于地理坐标系（通常是 NED，North-East-Down）北方向的转角。
 
-
 ————————————————————
-
-
 1. Accelerometer（加速度计） 内置
 作用：测量无人机在 机体系 (body frame) 下的线性加速度 (m/s²)。
 坐标系：机体系
@@ -332,8 +331,6 @@ yaw 来自于磁力计，ev ，gps 也可推断参见上方（但是一定要是
 —————————
 
 
-
-
 Typical configurations
 	EKF2_GPS_CTRL	EKF2_BARO_CTRL	EKF2_RNG_CTRL	EKF2_HGT_REF	EKF2_EV_CTRL
 Outdoor (default)	7 (Lon/lat/alt/vel)	1 (enabled)	1 (conditional)	1 (vision)	horizontal position，vertical position
@@ -425,7 +422,6 @@ C. 基于 GPS 速度的航向估计（GSF 备份/替代磁罗盘）
 * 若关闭磁力计（MAG_TYPE=5）而又没有视觉 yaw，且没有 GPS 速度信息（例如室内静止），yaw 会不可观测或缓慢漂移 —— 这属于算法可观测性限制。GitHub
 
 
-
 ——————————
 
 用不上先不用看：
@@ -481,8 +477,6 @@ https://docs.px4.io/main/en/config/accelerometer.html
 https://docs.px4.io/main/en/config/gyroscope.html
 
 
-
-
 ——————————————————————————————————————————
 
 ⚠️ 警告：降落问题（虽然极少见）
@@ -498,6 +492,7 @@ https://docs.px4.io/main/en/config/gyroscope.html
 Multicopters can be landed in any manual mode. Make sure to keep the throttle stick pulled down after touching down until the motors have switched off.
 
 ——————————————————————————————————————————
+
 坐标轴:
 
 Depending on the source of your reference frame, you will need to apply a custom transformation to the pose estimate before sending the MAVLink Vision/MoCap message. This is necessary to change the orientation of the parent and child frame of the pose estimate, such that it fits the PX4 convention. Have a look at the MAVROS odom plugin for the necessary transformations.
@@ -523,8 +518,8 @@ If you're working with EKF2, only the "vision" pipelines are supported. To use M
 * If you get data through a nav_msgs/Odometry ROS message then you will need to remap it to /mavros/odometry/out, making sure to update the frame_id and child_frame_id accordingly.
 * The odometry frames frame_id = odom, child_frame_id = base_link can be changed by updating the file in mavros/launch/px4_config.yaml. However, the current version of mavros (1.3.0) needs to be able to use the tf tree to find a transform from frame_id to the hardcoded frame odom_ned. The same applies to the child_frame_id, which needs to be connected in the tf tree to the hardcoded frame base_link_frd. If you are using mavros 1.2.0 and you didn't update the file mavros/launch/px4_config.yaml, then you can safely use the odometry frames frame_id = odom, child_frame_id = base_link without much worry.
 * Note that if you are sending odometry data to px4 using child_frame_id = base_link, then you need to make sure that the twist portion of the nav_msgs/Odometry message is expressed in body frame, not in inertial frame!!!!!.
-—————————
 
+——————————————————————————————————————————
 
 天天搁我yaw estimate error，我寻思着这也没有任何电线从飞控上方经过，一直校准那一堆传感器，把COM_ARM_EKF_YAW改到1也还是那样，不如直接禁用罗盘得了
 
@@ -537,9 +532,7 @@ SYS_HAS_MAG=0
 EKF2_MAG_TYPE=5(NONE)
 
 
-————————————————
-
-
+——————————————————————————————————————————
 
 如果你要做室内飞行（没有 GPS，没有磁力计），那么用视觉坐标系的 yaw 完全没问题，因为导航、控制只关心相对位置和角度。 如果你要做室外飞行或需要和地图对齐（比如航点任务），就需要 yaw 相对于真北，这时不能直接用视觉 yaw，而是要用磁力计/GNSS 融合来得到全球参考的航向。 在 px4 里面怎么设定这个 yaw
 
@@ -570,14 +563,13 @@ C. 基于 GPS 速度的航向估计（GSF 备份/替代磁罗盘）
 * 设 EKF2_MAG_TYPE = 5 (none) 关闭磁力计；起飞后做一定水平运动，EKF 会用 GPS 速度把主滤波的 yaw 对齐。适合磁环境差且不方便上双天线的场景。docs.px4.io
 
 
-
 小贴士 / 易错点
 * 融合视觉 yaw 时，请确保你发送的 MAVLink ODOMETRY/vision 的姿态定义与 PX4 期望一致（机体系/坐标轴方向一致）；用错坐标系会导致航向整体偏转。文档已强调“融合视觉 yaw 就是以视觉系为参考”。docs.px4.io
 * 双天线 GPS 要正确设置天线基线方向与 GPS_YAW_OFFSET；装配方向错 90°/180° 会让航向恒偏。docs.px4.io+1
 * 若关闭磁力计（MAG_TYPE=5）而又没有视觉 yaw，且没有 GPS 速度信息（例如室内静止），yaw 会不可观测或缓慢漂移 —— 这属于算法可观测性限制。GitHub
 
-——————————
 
+——————————————————————————————————————————
 
 以 /mavros/odometry/out 消息为例，假设：
 
