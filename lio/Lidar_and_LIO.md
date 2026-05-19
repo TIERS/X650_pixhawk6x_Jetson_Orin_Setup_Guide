@@ -24,7 +24,7 @@ This guide covers the complete setup process for the Livox MID360 LiDAR sensor w
 
 ### Driver Configuration
 
-For livox serials, FAST-LIO only support the data collected by the livox_lidar_msg.launch since only its livox_ros_driver/CustomMsg.
+**For livox serials, FAST-LIO only support livox_ros_driver/CustomMsg pointcloud type.**
 
 Configure the driver by editing the following files:
 - **Config file**: `/config/MID360_config.json` (inside the driver folder)
@@ -63,7 +63,7 @@ Example launch files are provided in the driver folder:
 
 ### Coordinate System Explanation
 
-We use MAVROS to pass odometry data to PX4. **MAVROS automatically handles NED (North-East-Down) conversions**.
+We use MAVROS to pass odometry data to PX4. **MAVROS automatically handles NED (North-East-Down) conversions. So when we modify anything on ros, we only need to think in a ROS way.**
 
 #### PX4 Coordinate Systems
 
