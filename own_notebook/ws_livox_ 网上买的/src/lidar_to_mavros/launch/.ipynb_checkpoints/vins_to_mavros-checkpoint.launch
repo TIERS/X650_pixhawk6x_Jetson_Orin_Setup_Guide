@@ -1,0 +1,7 @@
+<launch>
+<!-- Start your node -->
+<include file="$(find livox_ros_driver2)/launch_ROS1/msg_MID360.launch"/>
+<include file="$(find fast_lio)/launch/mapping_mid360.launch"/>
+<include file="$(find mavros)/launch/px4.launch"/>
+<node name="vins_to_mavros" pkg="vins_to_mavros" type="vins_to_mavros" output="screen"/>
+</launch>
