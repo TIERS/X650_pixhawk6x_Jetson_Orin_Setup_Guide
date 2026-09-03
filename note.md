@@ -84,6 +84,8 @@ network:
 
 Instead, we use a simpler configuration as shown below. **Remember to adapt the settings to your own network environment.** Make sure your Jetson and PX4 are on the same subnet and there are no conflicting IP addresses.
 
+this is the ip setup for jetson:
+
 ```yaml
 network:
   version: 2
