@@ -172,6 +172,8 @@ CAL_MAG1_PRIO:disabled(high)
 CAL_MAG2_PRIO:disabled(hig
 
 
+
+
 outdoor：
 EKF2_EV_CTRL： 0
 EKF2_MAG_TYPE：automatic
