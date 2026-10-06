@@ -6,16 +6,6 @@
 - **SSH**：`ssh x650@192.168.50.240`  
 - **Password**：`future`
 
-router：192.168.7.1
-asus：future2025 but minh destroyed it
-drone ip: 192.168.7.240
-my dell laptop ip: 192.168.7.172
-dog ip: 192.168.7.225
-
-
-
-dog's own sensors' ip:192.168.1.xx
-
 
 
 mocap needs TIAIRS wifi:
@@ -32,22 +22,24 @@ dog ip: 192.168.194.228
 
 
 
-这台6x上的px4的默认ip仍然是192.168.0.3
-jetson主机ip：192.168.0.1
-mid360ip：192.168.0.2
+jetson ip：192.168.0.1
+mid360 ip：192.168.0.2
 fc ip：192.168.0.3
 
 
 
 I/O PWM out= main out
 FMU pwm out= aux 连接的马达
-telem2 内部已经连接到 jetson,我的实验里面不上
+telem2 内部已经连接到 jetson,我的实验里面用不上，我走的是 ethernet 连 jetson
 
 mavlink has 3 instances.
 mav_0 is in telem1, connected to skydriod rc
 mav_1 is in telem3, connect to the normal telemetry radio
-mav_2 is in ethernet, connect to switch on jetsonboard, so it's onboard mode.
+以上两个是可以互换的
 
+
+
+mav_2 is in ethernet, connect to switch on jetsonboard, so it's onboard mode.
 
 所以应该设置成如下：
 
@@ -159,7 +151,7 @@ For more information on this return type see Home/Rally Point Return Type (RTL_
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-indoor：直接只依赖于 lio 关闭磁力计和 gps
+indoor：based on lio 
 EKF2_EV_CTRL ：horizontal position，vertical position，yaw ;yaw will use ev as reference
 EKF2_MAG_TYPE：none 
 EKF2_HGT_REF：vision
@@ -174,7 +166,7 @@ CAL_MAG2_PRIO:disabled(hig
 
 
 
-outdoor：
+outdoor：based on RTK
 EKF2_EV_CTRL： 0
 EKF2_MAG_TYPE：automatic
 EKF2_HGT_REF：gps
