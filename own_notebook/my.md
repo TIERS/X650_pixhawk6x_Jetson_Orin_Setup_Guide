@@ -266,9 +266,6 @@ Bitmask:
 * 3: Dual antenna heading
 
 
-EKF2_GPS
-EKF2_GPS 
-
 
 7.rtk
 同 gps，我们的这款 rtk 也做不了 dual，所以无法提供 yaw
