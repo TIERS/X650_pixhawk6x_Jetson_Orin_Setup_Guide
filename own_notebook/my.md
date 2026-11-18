@@ -52,28 +52,21 @@ network:
 ```
 
 
+JetPack 5.1.2  ros1 Noetic
+qgc4.4.4版本 https://docs.qgroundcontrol.com/Stable_V4.4/en/
+px4版本：1.15.4
 
-# JetPack 5.1.2  ros1 Noetic
+
 
 ### realsense Configuration
 
-
-
 git clone https://github.com/pal-robotics/ddynamic_reconfigure.git
 
-px4版本：1.15.4
-
-RC IN:遥控器
 i2c连接了range finder
-
-qgc4.4.4版本 https://docs.qgroundcontrol.com/Stable_V4.4/en/
-
-
 
 串口：
 
 “UART1” 指的是 Jetson 主板上的第一个通用异步收发传输器（Universal Asynchronous Receiver/Transmitter）接口，也就是串口中的一个硬件控制单元。你可以把它理解为主板上标号为1的串口控制器。
-
 
 but!!!!!在我板子上实际连接的是/dev/ttyTHS0
 
@@ -139,8 +132,6 @@ For more information on this return type see Home/Rally Point Return Type (RTL_
 
 
 ------------------------------------------------------------------------------------
-
-
 装了 新的payload之后，do sensors calibration and auto tuning
 
 
